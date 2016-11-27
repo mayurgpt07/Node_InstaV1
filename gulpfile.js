@@ -3,7 +3,7 @@ var inject = require('gulp-inject');
 var nodemon = require('gulp-nodemon');
 var wiredep = require('wiredep').stream;
 var path = {
-	javascript: ['./usejs/*.js','./app/*.js','./app/**/*.js']
+	javascript: ['./usejs/*.js','./node_modules/angular-route/angular-route.min.js','./app/*.js','./app/**/*.js']
 };
 gulp.task('run',['inject'],function(){
 	nodemon({

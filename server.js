@@ -14,6 +14,7 @@ var port = process.env.port || 8002;
 
 app.use('/app', express.static(__dirname + '/app'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use('/usejs', express.static(__dirname + '/usejs'));
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
