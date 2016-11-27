@@ -1,11 +1,17 @@
-(function(window, angular, undefined){
-	angular.module('app',['ngRoute']).confog(routing);
-	routing.$inject = ['$routeProvider'];
-	function routing($routeProvider){
-		$routeProvider.when('/',{
-			templateUrl:'app/view/view.html',
-			controller:'viewCtrl',
-			controllerAs:'view'
-		});
-	}
+(function(window, angular, undefined) {
+    angular.module('app', ['ngRoute']).config(routing);
+    routing.$inject = ['$routeProvider'];
+
+    function routing($routeProvider) {
+        $routeProvider.when('/', {
+            templateUrl: 'app/view/view.html',
+            controller: 'viewCtrl',
+            controllerAs: 'View'
+        }).
+        when('/share', {
+            templateUrl: 'app/share/share.html',
+            controller: 'shareCtrl',
+            controllerAs: 'Share'
+        });
+    }
 })(window, window.angular);
