@@ -6,7 +6,7 @@
     function viewCtrl($scope, $http) {
     	var vm = this;
     	vm.test = "hello";
-    	console.log(vm.test);
+    	//console.log(vm.test);
     }
 
 })(window, window.angular);
