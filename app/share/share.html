@@ -1,3 +1,8 @@
 <div>
-	<h1>{{Share.data}}</h1>
+	<div class="button" ngf-select ng-model="Share.file" name="file" ngf-pattern="'image/*'"
+		ngf-accept="'image/*'" ngf-max-size="2MB" ngf-min-height="100">Select</div>
+	<input type="text" ng-model="Share.name" name="name"> <br />
+	<textarea ng-model="Share.description">Description</textarea>
+
+	<button ng-click="Share.upload()">Send to server</button>
 </div>

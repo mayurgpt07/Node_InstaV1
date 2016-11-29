@@ -1,6 +1,6 @@
 (function(window, angular, undefined) {
-    angular.module('app', ['ngRoute']).config(routing);
-    routing.$inject = ['$routeProvider','ngFileUpload'];
+    angular.module('app', ['ngRoute','ngFileUpload']).config(routing);
+    routing.$inject = ['$routeProvider'];
 
     function routing($routeProvider) {
         $routeProvider.when('/', {
