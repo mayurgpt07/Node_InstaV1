@@ -22,6 +22,7 @@
 
         function upload() {
         	console.log("hehehe");
+            console.log(request);            
             Upload.upload({
                 url: '/share',
                 data: {

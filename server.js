@@ -1,8 +1,6 @@
-var cloudinary = require('cloudinary'),
-    express = require('express'),
+var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
-    Pic = require('./datasets/pics.js'),
     app = express(),
     multiparty = require('connect-multiparty'),
     multipartMiddleware = multiparty(),
@@ -11,7 +9,7 @@ var cloudinary = require('cloudinary'),
 //Set configurations
 var configs = require('./config/config.js')();
 
-//	mongoose.connect(process.env.MONGO_CONNECTION);
+mongoose.connect(process.env.MONGO_CONNECTION);
 
 var port = process.env.port || 8002;
 

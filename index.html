@@ -1,6 +1,9 @@
 <html ng-app="app">
-	<head>
 		<head>
+		<!--inject:css-->
+		<link rel="stylesheet" href="/usejs/bootstrap.css">
+		<!--endinject-->
+		</head>
 			<body>
 				<h1>Heu thwwew</h1>
 				<ul>
@@ -8,10 +11,10 @@
 					<li><a ng-href="#/share">Share</a></li>
 				</ul>
 				<div ng-view></div>
-				<!--inject:css-->
-				<!--endinject-->
 				<!--inject:js-->
 				<script src="/usejs/angular.min.js"></script>
+				<script src="/usejs/bootstrap.js"></script>
+				<script src="/usejs/jquery-3.0.0.min.js"></script>
 				<script src="/usejs/ng-upload.js"></script>
 				<script src="/node_modules/angular-route/angular-route.min.js"></script>
 				<script src="/app/app.js"></script>

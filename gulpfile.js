@@ -3,8 +3,9 @@ var inject = require('gulp-inject');
 var nodemon = require('gulp-nodemon');
 var wiredep = require('wiredep').stream;
 var path = {
-    javascript: ['./usejs/*.js', './node_modules/angular-route/angular-route.min.js', 
-    './app/*.js', './app/**/*.js']
+    injected: ['./usejs/*.css','./usejs/*.js', './node_modules/angular-route/angular-route.min.js',
+        './app/*.js', './app/**/*.js'
+    ]
 };
 gulp.task('run', ['inject'], function() {
     nodemon({
@@ -21,7 +22,7 @@ gulp.task('run', ['inject'], function() {
 });
 
 gulp.task('inject', function() {
-    var injectSrc = gulp.src(path.javascript, {
+    var injectSrc = gulp.src(path.injected, {
         read: false
     });
     return gulp.src(['./index.html'])
