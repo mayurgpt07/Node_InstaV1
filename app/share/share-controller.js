@@ -18,23 +18,25 @@
             return vm.file;
         }, function() {
             console.log(vm.file);
+            
         });
 
         function upload() {
-        	console.log("hehehe");
-            console.log(request);            
+            console.log("hehehe");
+
             Upload.upload({
                 url: '/share',
                 data: {
                     file: vm.file,
-                    data: request,
+                    data: {
+                        name: vm.name,
+                        description: vm.description
+                    }
                 }
             }).then(function success(success) {
                 console.log(success);
             }, function error(error) {
                 console.log(error);
-            }, function event(evt) {
-
             });
         }
     }
