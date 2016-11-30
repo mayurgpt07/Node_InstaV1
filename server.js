@@ -4,7 +4,8 @@ var express = require('express'),
     app = express(),
     multiparty = require('connect-multiparty'),
     multipartMiddleware = multiparty(),
-    uploadRouter = require('./controllers/uploadController.js')();
+    uploadRouter = require('./controllers/uploadController.js')(),
+    viewRouter = require('./controllers/viewController.js')();
 
 //Set configurations
 var configs = require('./config/config.js')();
@@ -18,7 +19,8 @@ app.use(bodyParser.json());
 app.use(multipartMiddleware);
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/usejs', express.static(__dirname + '/usejs'));
-app.use('/share',multipartMiddleware,uploadRouter);
+app.use('/share', multipartMiddleware, uploadRouter);
+app.use('/getNewPics', viewRouter);
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
