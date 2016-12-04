@@ -16,9 +16,12 @@
     "cloudinary": "^1.4.4",
     "connect-multiparty": "^2.0.0",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "gulp": "^3.9.1",
     "gulp-inject": "^4.1.0",
     "gulp-nodemon": "^2.2.1",
-    "mongoose": "^4.6.5"
+    "mongoose": "^4.6.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   }
 }

@@ -12,6 +12,11 @@
             templateUrl: 'app/share/share.html',
             controller: 'shareCtrl',
             controllerAs: 'Share'
+        }).
+        when('/login', {
+            templateUrl: 'app/login/login.html',
+            controller: 'loginCtrl',
+            controllerAs: 'Login'
         });
     }
 })(window, window.angular);
