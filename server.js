@@ -8,7 +8,8 @@ var express = require('express'),
     multipartMiddleware = multiparty(),
     uploadRouter = require('./controllers/uploadController.js')(),
     viewRouter = require('./controllers/viewController.js')(),
-    loginRouter = require('./controllers/loginController.js')();
+    loginRouter = require('./controllers/loginController.js')(),
+    profileRouter = require('./controllers/profileController.js')();
 
 //Set configurations
 var configs = require('./config/config.js')();
@@ -33,6 +34,7 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/usejs', express.static(__dirname + '/usejs'));
 app.use('/share', multipartMiddleware, uploadRouter);
 app.use('/', loginRouter);
+app.use('/profile',profileRouter);
 app.use('/getNewPics', viewRouter);
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');

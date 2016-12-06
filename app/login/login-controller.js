@@ -32,7 +32,7 @@
             console.log(vm.credentials);
             $http.post('/login', vm.credentials).then(function success(response) {
                 console.log(response);
-                $location.path('/share');
+                // $location.path('/profile/'+response.data);
             }, function error(error) {
                 console.log(error);
             });

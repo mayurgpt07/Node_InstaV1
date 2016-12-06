@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+	Pics = require('../datasets/pics.js');
 
 module.exports = mongoose.model('User', {
     name: 'String',

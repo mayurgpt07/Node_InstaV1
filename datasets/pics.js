@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    User = require('../datasets/user.js');
 
 module.exports = mongoose.model('Pic', {
     name: 'String',
@@ -7,5 +8,6 @@ module.exports = mongoose.model('Pic', {
     uploadDate: {
         type: Date,
         default: Date.now
-    }
+    },
+    user: [User]
 });

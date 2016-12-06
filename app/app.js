@@ -1,5 +1,5 @@
 (function(window, angular, undefined) {
-    angular.module('app', ['ngRoute','ngFileUpload']).config(routing);
+    angular.module('app', ['ngRoute', 'ngFileUpload']).config(routing);
     routing.$inject = ['$routeProvider'];
 
     function routing($routeProvider) {
@@ -17,6 +17,11 @@
             templateUrl: 'app/login/login.html',
             controller: 'loginCtrl',
             controllerAs: 'Login'
+        }).
+        when('/profile/:id', {
+            templateUrl: 'app/profile/profile.html',
+            controller: 'profileCtrl',
+            controllerAs: 'Profile'
         });
     }
 })(window, window.angular);

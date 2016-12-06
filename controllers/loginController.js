@@ -9,7 +9,7 @@ var router = function() {
             successRedirect: '/#/share',
             failureRedirect: '/#/login'
         }), function(req, res) {
-            // res.send('/#/share');
+             console.log(res);
         });
 
     loginRouter.route('/signup')
@@ -29,6 +29,7 @@ var router = function() {
                             console.log(err);
                         } else {
                             console.log(req.user);
+                            res.send(req.user).status(200);
                         }
                         console.log("logged in");
                     });
