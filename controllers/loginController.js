@@ -5,11 +5,12 @@ var express = require('express'),
 
 var router = function() {
     loginRouter.route('/login')
-        .post(passport.authenticate('local', {
-            successRedirect: '/#/share',
-            failureRedirect: '/#/login'
-        }), function(req, res) {
-             console.log(res);
+        .post(passport.authenticate('local',{
+            failureRedirect: '/'
+        }),function(req, res) {
+             console.log('This is', req.session.passport.user);
+             var user = req.session.passport.user;
+             res.send(user).status(200);
         });
 
     loginRouter.route('/signup')

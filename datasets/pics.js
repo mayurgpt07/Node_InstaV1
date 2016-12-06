@@ -8,6 +8,5 @@ module.exports = mongoose.model('Pic', {
     uploadDate: {
         type: Date,
         default: Date.now
-    },
-    user: [User]
+    }
 });
