@@ -8,6 +8,7 @@
 		console.log($routeParams.id);
 		var vm = this;
 		vm.id = $routeParams.id;
+		console.log('this is');
 		$http.get('/profile/'+vm.id).then(function success(response){
 
 		}, function error(error){

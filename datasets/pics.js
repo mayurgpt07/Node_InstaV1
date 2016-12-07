@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    User = require('../datasets/user.js');
+    Comment = require('../datasets/comments.js');
 
 module.exports = mongoose.model('Pic', {
     name: 'String',
@@ -8,5 +8,17 @@ module.exports = mongoose.model('Pic', {
     uploadDate: {
         type: Date,
         default: Date.now
+    },
+    commentUser: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Comment'
+    },
+    likeCount: {
+        type: Number,
+        default: 0
+    },
+    commentCount: {
+        type: Number	,
+        default: 0
     }
 });
