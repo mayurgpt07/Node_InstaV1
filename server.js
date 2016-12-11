@@ -10,7 +10,8 @@ var express = require('express'),
     uploadRouter = require('./controllers/uploadController.js')(),
     viewRouter = require('./controllers/viewController.js')(),
     loginRouter = require('./controllers/loginController.js')(),
-    profileRouter = require('./controllers/profileController.js')();
+    profileRouter = require('./controllers/profileController.js')(),
+    commlikeRouter = require('./controllers/commlikeController.js')();
 
 //Set configurations
 var configs = require('./config/config.js')();
@@ -42,6 +43,7 @@ app.use('/share', multipartMiddleware, uploadRouter);
 app.use('/', loginRouter);
 app.use('/profile', profileRouter);
 app.use('/getNewPics', viewRouter);
+app.use('/upload', commlikeRouter);
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });

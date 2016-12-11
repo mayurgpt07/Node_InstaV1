@@ -10,9 +10,9 @@
 		vm.id = $routeParams.id;
 		console.log('this is');
 		$http.get('/profile/'+vm.id).then(function success(response){
-
+			console.log(response);
 		}, function error(error){
-
+			console.log(error);
 		});
 	}
 })(window, window.angular);
