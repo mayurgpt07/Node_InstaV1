@@ -1,9 +1,9 @@
 (function(window, angular, undefined) {
     angular.module('app')
         .controller('viewCtrl', viewCtrl);
-    viewCtrl.$inject = ['$scope', '$http'];
+    viewCtrl.$inject = ['$scope', '$http', '$rootScope', '$location'];
 
-    function viewCtrl($scope, $http) {
+    function viewCtrl($scope, $http, $rootScope, $location) {
         var vm = this;
         vm.commentText = undefined;
         vm.pics = undefined;
@@ -17,27 +17,26 @@
         }, function error(error) {
             console.log(error);
         });
-        console.log((window.performance.now() / 1000).toFixed(3));
-        $scope.$watch(function(){
+        $scope.$watch(function() {
             return vm.commentText;
-        },function(){
+        }, function() {
             console.log(vm.commentText);
         });
-        function comment(index){
+
+        function comment(index) {
             console.log(index);
-            vm.pics[index].commentCount = 2;
+            // vm.pics[index].commentCount = 2;
             vm.data = {
-                pics : vm.pics[index],
+                pics: vm.pics[index],
                 commentText: vm.commentText[index]
             };
             console.log(vm.data);
-            $http.post('/upload/comment',vm.data).then(function success(response){
+            $http.post('/upload/comment', vm.data).then(function success(response) {
                 console.log(response);
-            }, function error(error){
+            }, function error(error) {
                 console.log(error);
             });
         }
-        //console.log(vm.test);
     }
 
 })(window, window.angular);

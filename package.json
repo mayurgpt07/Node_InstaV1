@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "a": "^2.1.0",
     "angular": "^1.5.8",
     "angular-route": "^1.5.8",
     "body-parser": "^1.15.2",
@@ -22,6 +23,7 @@
     "gulp-inject": "^4.1.0",
     "gulp-nodemon": "^2.2.1",
     "mongoose": "^4.6.5",
+    "ngstorage": "^0.3.11",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
   }

@@ -1,8 +1,11 @@
 (function(window, angular, undefined) {
-    angular.module('app', ['ngRoute', 'ngFileUpload']).config(routing);
+    angular.module('app', ['ngRoute', 'ngStorage']).config(routing);
     routing.$inject = ['$routeProvider'];
+    angular.module('app').run(running);
+    running.$inject = ['$rootScope', '$location', '$window', '$localStorage'];
 
     function routing($routeProvider) {
+
         $routeProvider.when('/', {
             templateUrl: 'app/view/view.html',
             controller: 'viewCtrl',
@@ -23,5 +26,17 @@
             controller: 'profileCtrl',
             controllerAs: 'Profile'
         });
+    }
+
+    function running($rootScope, $location, $window, $localStorage) {
+        $rootScope.$on('$routeChangeStart', routeChangeStart);
+
+        function routeChangeStart(event, next, current) {
+            console.log($localStorage.loggedIn);
+            if (!$localStorage.loggedIn) {
+                $rootScope.savedLocation = $location.url();
+                $location.path('/login');
+            }
+        }
     }
 })(window, window.angular);

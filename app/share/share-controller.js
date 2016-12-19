@@ -2,9 +2,9 @@
     angular.module('app').
     controller('shareCtrl', shareCtrl);
 
-    shareCtrl.$inject = ['$scope', '$http', 'Upload'];
+    shareCtrl.$inject = ['$scope', '$http'];
 
-    function shareCtrl($scope, $http, Upload) {
+    function shareCtrl($scope, $http) {
         var vm = this;
         vm.data = "hello share";
         vm.file = undefined;
