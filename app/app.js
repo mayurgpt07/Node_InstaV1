@@ -2,7 +2,7 @@
     angular.module('app', ['ngRoute', 'ngStorage']).config(routing);
     routing.$inject = ['$routeProvider'];
     angular.module('app').run(running);
-    running.$inject = ['$rootScope', '$location', '$window', '$localStorage'];
+    running.$inject = ['$rootScope', '$location', '$window', '$sessionStorage'];
 
     function routing($routeProvider) {
 
@@ -16,27 +16,34 @@
             controller: 'shareCtrl',
             controllerAs: 'Share'
         }).
-        when('/login', {
+        when('/auth/login', {
             templateUrl: 'app/login/login.html',
             controller: 'loginCtrl',
             controllerAs: 'Login'
         }).
-        when('/profile/:id', {
+        when('/profile', {
             templateUrl: 'app/profile/profile.html',
             controller: 'profileCtrl',
             controllerAs: 'Profile'
         });
     }
 
-    function running($rootScope, $location, $window, $localStorage) {
+    function running($rootScope, $location, $window, $sessionStorage) {
         $rootScope.$on('$routeChangeStart', routeChangeStart);
 
         function routeChangeStart(event, next, current) {
-            console.log($localStorage.loggedIn);
-            if (!$localStorage.loggedIn) {
+            console.log($sessionStorage.loggedIn);
+            console.log($location.url());
+            if (!$sessionStorage.loggedIn) {
                 $rootScope.savedLocation = $location.url();
-                $location.path('/login');
+                $location.path('/auth/login');
             }
+             else{
+                 if($sessionStorage.loggedIn){
+                     if($location.url() === '/auth/login')
+                        $location.path('/');
+                 }
+             }
         }
     }
 })(window, window.angular);

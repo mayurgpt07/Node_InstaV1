@@ -7,7 +7,7 @@ var router = function() {
     commlikeRouter.route('/comment').
     post(function(req, res) {
         var body = req.body;
-        console.log(body.pics);
+        console.log(body);
         console.log(req.session);
         /*		Pics.findById(id, function(err, result){
         			if(err){
@@ -18,15 +18,15 @@ var router = function() {
         			}
         		});
         */
-        Pics.update({
-            _id: body.pics._id
-        }, {
-            $set: { 
-            	'commentCount' : body.pics.commentCount,
-            }
-        },function(err, result){
-        	console.log(result);
-        });
+        // Pics.update({
+        //     _id: body.pics._id
+        // }, {
+        //     $set: { 
+        //     	'commentCount' : body.pics.commentCount,
+        //     }
+        // },function(err, result){
+        // 	console.log(result);
+        // });
     });
 
     return commlikeRouter;

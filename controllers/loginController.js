@@ -1,4 +1,4 @@
-var express = require('express'),
+    var express = require('express'),
     User = require('../datasets/user.js'),
     loginRouter = express.Router(),
     passport = require('passport');

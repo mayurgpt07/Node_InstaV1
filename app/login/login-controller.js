@@ -2,14 +2,14 @@
     angular.module('app').
     controller('loginCtrl', loginCtrl);
 
-    loginCtrl.$inject = ['$scope', '$http', '$location', '$rootScope','$localStorage'];
+    loginCtrl.$inject = ['$scope', '$http', '$location', '$rootScope','$sessionStorage'];
 
-    function loginCtrl($scope, $http, $location, $rootScope, $localStorage) {
+    function loginCtrl($scope, $http, $location, $rootScope, $sessionStorage) {
         var vm = this;
         console.log('in login-controller');
-        console.log($localStorage);
-        vm.$storage = $localStorage;
-        vm.$storage.loggedIn = false;
+        console.log($sessionStorage);
+        vm.$storage = $sessionStorage;
+        vm.$storage.loggedIn = false;   
 
         vm.credentials = {
             email: undefined,
@@ -35,11 +35,12 @@
 
         function login() {
             console.log(vm.credentials);
-            $http.post('/login', vm.credentials).then(function success(response) {
+            $http.post('/auth/login', vm.credentials).then(function success(response) {
                 console.log(response);
                 if (response.data !== null || response.data !== undefined || respsponse.data !== '') {
+                    vm.$storage.data = response.data;
                     vm.$storage.loggedIn = true;
-                    $location.url('/share');
+                    $location.url('/profile');
                 }
             }, function error(error) {
                 console.log(error);
@@ -47,9 +48,12 @@
         }
 
         function signup() {
-            $http.post('/signup', vm.signupCredentials).then(function success(response) {
+            $http.post('/auth/signup', vm.signupCredentials).then(function success(response) {
                 console.log(response);
-                $location.path('/profile/' + response.data._id);
+                vm.credentials.email = response.data.email;
+                vm.credentials.password = response.data.password;
+                vm.login();
+                // $location.path('/profile/' + response.data._id);
             }, function error(error) {
                 console.log(error);
             });

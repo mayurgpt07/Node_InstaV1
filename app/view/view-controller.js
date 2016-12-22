@@ -8,6 +8,7 @@
         vm.commentText = undefined;
         vm.pics = undefined;
         vm.comment = comment;
+        // vm.logout = logout;
         $http.get('/getNewPics').
         then(function success(response) {
             console.log(response.data.length);
