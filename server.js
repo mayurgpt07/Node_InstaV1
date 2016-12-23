@@ -10,7 +10,7 @@ var express = require('express'),
     uploadRouter = require('./controllers/uploadController.js')(),
     viewRouter = require('./controllers/viewController.js')(),
     loginRouter = require('./controllers/loginController.js')(),
-    profileRouter = require('./controllers/profileController.js')(),
+    // profileRouter = require('./controllers/profileController.js')(),
     commlikeRouter = require('./controllers/commlikeController.js')();
 
 //Set cloud configurations
@@ -29,8 +29,8 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(multipartMiddleware);
 app.use(session({
-    secret: 'mayur',
-    resave: true,
+    secret: process.env.SESSION_SECRET || 'mansi',
+    resave: false,
     saveUninitialized: true
 }));
 app.use(passport.initialize());
@@ -42,9 +42,9 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/usejs', express.static(__dirname + '/usejs'));
 //middleware
 app.use('/share', multipartMiddleware, uploadRouter);
-//route configurations
+//route configurations  
 app.use('/auth', loginRouter);
-app.use('/profile', profileRouter);
+// app.use('/profile', profileRouter);
 app.use('/getNewPics', viewRouter);
 app.use('/upload', commlikeRouter);
 app.get('/', function(req, res) {

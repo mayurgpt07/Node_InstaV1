@@ -26,7 +26,7 @@
 
         function comment(index) {
             console.log(index);
-            // vm.pics[index].commentCount = 2;
+            vm.pics[index].commentCount = 4;
             vm.data = {
                 pics: vm.pics[index],
                 commentText: vm.commentText[index]

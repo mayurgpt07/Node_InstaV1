@@ -1,6 +1,7 @@
 var express = require('express'),
     commlikeRouter = express.Router(),
     Pics = require('../datasets/pics.js'),
+    Comments = require('../datasets/comments.js'),
     mongoose = require('mongoose');
 
 var router = function() {
@@ -9,24 +10,24 @@ var router = function() {
         var body = req.body;
         console.log(body);
         console.log(req.session);
-        /*		Pics.findById(id, function(err, result){
-        			if(err){
-        				throw err;
-        			}
-        			else{
-        				console.log(result);
-        			}
-        		});
-        */
-        // Pics.update({
-        //     _id: body.pics._id
-        // }, {
-        //     $set: { 
-        //     	'commentCount' : body.pics.commentCount,
-        //     }
-        // },function(err, result){
-        // 	console.log(result);
-        // });
+        var commentsInfo = new Comments();
+        commentsInfo.user = req.user;
+        commentsInfo.commentText = req.user;
+        Pics.update({
+            _id: body.pics._id
+        }, {
+            $set: {
+                commentCount: body.pics.commentCount,
+                commentUser: commentsInfo
+            }
+        }, function(err, result) {
+            if (err) {
+                throw err;
+            } else {
+                console.log(result);
+                res.send(result).status(200);
+            }
+        });
     });
 
     return commlikeRouter;

@@ -13,7 +13,8 @@ gulp.task('run', ['inject'], function() {
             script: 'server.js',
             ext: 'js',
             env: {
-                PORT: 8002
+                PORT: 8002,
+                SESSION_SECRET: 'mayur'
             },
             ignore: ['./node_modules/**']
         })

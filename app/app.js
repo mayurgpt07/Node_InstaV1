@@ -1,5 +1,5 @@
 (function(window, angular, undefined) {
-    angular.module('app', ['ngRoute', 'ngStorage']).config(routing);
+    angular.module('app', ['ngRoute', 'ngStorage', 'ngFileUpload']).config(routing);
     routing.$inject = ['$routeProvider'];
     angular.module('app').run(running);
     running.$inject = ['$rootScope', '$location', '$window', '$sessionStorage'];
@@ -38,12 +38,12 @@
                 $rootScope.savedLocation = $location.url();
                 $location.path('/auth/login');
             }
-             else{
-                 if($sessionStorage.loggedIn){
-                     if($location.url() === '/auth/login')
-                        $location.path('/');
-                 }
-             }
+             // else{
+             //     if($sessionStorage.loggedIn){
+             //         if($location.url() === '/auth/login')
+             //            $location.path('/');
+             //     }
+             // }
         }
     }
 })(window, window.angular);

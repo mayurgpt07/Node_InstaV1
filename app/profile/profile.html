@@ -1,3 +1,10 @@
 <div>
-	<h1></h1>
+	<h1>{{Profile.data.email}}</h1>
+	<ul>
+		<li><a ng-href="#/">View</a></li>
+		<li><a ng-href="#/share">Share</a></li>
+		<li><a ng-href="#/auth/login">Login</a></li>
+	</ul>
+	<br />
+	<button class=" " ng-click=Profile.logout()>Logout</button>
 </div>
