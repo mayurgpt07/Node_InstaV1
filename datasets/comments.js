@@ -4,7 +4,6 @@ var mongoose = require('mongoose'),
 module.exports = mongoose.model('Comments',{
 	user: {
         type: [mongoose.Schema.Types.ObjectId],
-        // ref: 'User'
         ref: 'User'
     },
     comment : [String]

@@ -7,7 +7,7 @@
     function loginCtrl($scope, $http, $location, $rootScope, $sessionStorage) {
         var vm = this;
         console.log('in login-controller');
-        console.log($sessionStorage);
+        // console.log($sessionStorage);
         vm.$storage = $sessionStorage;
         vm.$storage.loggedIn = false;   
 
