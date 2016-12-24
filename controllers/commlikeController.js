@@ -13,6 +13,9 @@ var router = function() {
         Pics.update({
             _id: body.pics._id
         }, {
+            $inc: {
+                commentCount: 1
+            },
             '$push': {
                 commentUser: {
                     user: {
