@@ -25,6 +25,7 @@
     "mongoose": "^4.6.5",
     "ngstorage": "^0.3.11",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "socket.io": "^1.7.2"
   }
 }

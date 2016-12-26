@@ -10,7 +10,6 @@
 		vm.$storage = $sessionStorage;
 		vm.data = vm.$storage.data;
 		console.log(vm.data);
-
 		function logout(){
 			$http.post('/auth/logout',vm.data).then(function success(response){
 				console.log(response);

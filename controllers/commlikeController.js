@@ -8,8 +8,6 @@ var router = function() {
     commlikeRouter.route('/comment').
     post(function(req, res) {
         var body = req.body;
-        // console.log(body);
-        // console.log(req.session);
         Pics.update({
             _id: body.pics._id
         }, {
@@ -32,7 +30,7 @@ var router = function() {
                 throw err;
             } else {
                 console.log(result);
-                //res.send(result).status(200);
+                res.send(result).status(200);
 
             }
         });

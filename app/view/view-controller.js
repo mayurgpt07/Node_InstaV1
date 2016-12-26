@@ -1,14 +1,16 @@
 (function(window, angular, undefined) {
     angular.module('app')
         .controller('viewCtrl', viewCtrl);
-    viewCtrl.$inject = ['$scope', '$http', '$rootScope', '$location'];
+    viewCtrl.$inject = ['$scope', '$http', '$rootScope', '$location', 'socketFactory'];
 
-    function viewCtrl($scope, $http, $rootScope, $location) {
+    function viewCtrl($scope, $http, $rootScope, $location, socketFactory) {
         var vm = this;
         vm.commentText = undefined;
         vm.pics = undefined;
+        vm.like = undefined;
         vm.comment = comment;
         // vm.logout = logout;
+
         $http.get('/getNewPics').
         then(function success(response) {
             console.log(response.data.length);
@@ -27,7 +29,7 @@
         function comment(index) {
             console.log(index);
             vm.pics[index].commentCount = 1;
-            vm.data = {
+            var data = {
                 pics: vm.pics[index],
                 commentText: vm.commentText[index]
             };
@@ -37,6 +39,17 @@
             }, function error(error) {
                 console.log(error);
             });
+        }
+
+        function like(index){
+            console.log(index);
+            var data = {
+                pics: vm.pics[index],
+                like: vm.pics[index]
+            };
+
+            socketFactory.emit('like',data);
+
         }
     }
 

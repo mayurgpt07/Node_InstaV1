@@ -38,12 +38,12 @@
                 $rootScope.savedLocation = $location.url();
                 $location.path('/auth/login');
             }
-             else{
-                 if($sessionStorage.loggedIn){
-                     if($location.url() === '/auth/login')
-                        $location.path('/profile');
-                 }
-             }
+             // else{
+             //     if($sessionStorage.loggedIn){
+             //         if($location.url() === '/auth/login')
+             //            $location.path('/profile');
+             //     }
+             // }
         }
     }
 })(window, window.angular);

@@ -20,6 +20,8 @@ mongoose.connect(process.env.MONGO_CONNECTION);
 
 var port = process.env.port || 8002;
 
+// console.log(io);
+
 //app conigurations
 app.use('/app', express.static(__dirname + '/app'));
 app.use(bodyParser.json());
@@ -51,6 +53,14 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 //port assessment
-app.listen(port, function() {
+var serverDet = app.listen(port, function() {
     console.log("Bitches started " + port);
+});
+var io = require('socket.io').listen(serverDet);
+io.sockets.on('connection', function(socket) {
+    console.log('Started the socket connection');
+
+    socket.on('like', function(data) {
+        console.log(data);
+    });
 });
