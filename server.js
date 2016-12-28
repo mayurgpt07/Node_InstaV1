@@ -7,18 +7,29 @@ var express = require('express'),
     multiparty = require('connect-multiparty'),
     cookieParser = require('cookie-parser'),
     multipartMiddleware = multiparty(),
+    port = process.env.port || 8002,
+    //assign port
+    serverDet = app.listen(port, function() {
+        console.log("Bitches started " + port);
+    }),
+    io = require('socket.io').listen(serverDet),
+    //session middleware establishment
+    sessionMiddlware = session({
+        secret: process.env.SESSION_SECRET || 'mansi',
+        resave: false,
+        saveUninitialized: true
+    }),
     uploadRouter = require('./controllers/uploadController.js')(),
     viewRouter = require('./controllers/viewController.js')(),
     loginRouter = require('./controllers/loginController.js')(),
     // profileRouter = require('./controllers/profileController.js')(),
-    commlikeRouter = require('./controllers/commlikeController.js')();
+    commlikeRouter = require('./controllers/commlikeController.js')(io, sessionMiddlware);
+
 
 //Set cloud configurations
 var configs = require('./config/config.js')();
 
 mongoose.connect(process.env.MONGO_CONNECTION);
-
-var port = process.env.port || 8002;
 
 // console.log(io);
 
@@ -30,11 +41,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(multipartMiddleware);
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'mansi',
-    resave: false,
-    saveUninitialized: true
-}));
+app.use(sessionMiddlware);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -52,15 +59,3 @@ app.use('/upload', commlikeRouter);
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
-//port assessment
-var serverDet = app.listen(port, function() {
-    console.log("Bitches started " + port);
-});
-var io = require('socket.io').listen(serverDet);
-// io.sockets.on('connection', function(socket) {
-//     console.log('Started the socket connection');
-
-//     socket.on('like', function(data) {
-//         console.log(data);
-//     });
-// });

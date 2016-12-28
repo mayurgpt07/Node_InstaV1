@@ -1,10 +1,11 @@
 var express = require('express'),
+    app = express(),
     commlikeRouter = express.Router(),
     Pics = require('../datasets/pics.js'),
     mongoose = require('mongoose'),
     User = require('../datasets/user.js');
 
-var router = function() {
+var router = function(io, sessionMiddleware) {
     commlikeRouter.route('/comment').
     post(function(req, res) {
         var body = req.body;
@@ -35,6 +36,43 @@ var router = function() {
             }
         });
     });
+    io.use(function(socket, next){
+        sessionMiddleware(socket.request, socket.request.res,next);
+    });
+
+    io.sockets.on('connection', function(socket) {
+        console.log('Started the socket connection');
+        //console.log('Helllllllo!!',socket.request.session);
+        socket.on('like', function(data) {
+            var body = socket.request.session.passport.user;
+            var status;
+            Pics.update({
+                _id: data.pics._id
+            }, {
+                $inc :{
+                    likeCount: 1
+                },
+                '$push': {
+                    likeUser: {
+                        _id: body._id,
+                        name: body.name,
+                        email: body.email
+                    }
+                }
+            },function(err, result){
+                if(err){
+                    status = 404;
+                    throw err;
+                }
+                else{
+                    console.log(result);
+                    status = 200;
+                }
+                socket.emit('likeBack',status);
+            });
+        });
+    });
+
 
     return commlikeRouter;
 };

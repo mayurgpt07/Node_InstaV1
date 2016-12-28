@@ -9,6 +9,7 @@
         vm.pics = undefined;
         vm.like = undefined;
         vm.comment = comment;
+        vm.likePic = likePic;
         // vm.logout = logout;
 
         $http.get('/getNewPics').
@@ -44,11 +45,15 @@
         function likePic(index){
             console.log(index);
             var data = {
-                pics: vm.pics[index]
+                pics: {
+                    _id: vm.pics[index]._id,
+                    likeCount: vm.pics[index].likeCount
+                }
+
             };
 
             socketFactory.emit('like',data);
-            socketFactory.on('like', function(data){
+            socketFactory.on('likeBack', function(data){
                 console.log(data);
             });
 
