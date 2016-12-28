@@ -41,14 +41,16 @@
             });
         }
 
-        function like(index){
+        function likePic(index){
             console.log(index);
             var data = {
-                pics: vm.pics[index],
-                like: vm.pics[index]
+                pics: vm.pics[index]
             };
 
             socketFactory.emit('like',data);
+            socketFactory.on('like', function(data){
+                console.log(data);
+            });
 
         }
     }

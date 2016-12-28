@@ -57,10 +57,10 @@ var serverDet = app.listen(port, function() {
     console.log("Bitches started " + port);
 });
 var io = require('socket.io').listen(serverDet);
-io.sockets.on('connection', function(socket) {
-    console.log('Started the socket connection');
+// io.sockets.on('connection', function(socket) {
+//     console.log('Started the socket connection');
 
-    socket.on('like', function(data) {
-        console.log(data);
-    });
-});
+//     socket.on('like', function(data) {
+//         console.log(data);
+//     });
+// });
