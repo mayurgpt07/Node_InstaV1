@@ -36,12 +36,13 @@ var router = function(io, sessionMiddleware) {
             }
         });
     });
-    io.use(function(socket, next){
-        sessionMiddleware(socket.request, socket.request.res,next);
+    io.use(function(socket, next) {
+        sessionMiddleware(socket.request, socket.request.res, next);
     });
 
     io.sockets.on('connection', function(socket) {
         console.log('Started the socket connection');
+        var data;
         //console.log('Helllllllo!!',socket.request.session);
         socket.on('like', function(data) {
             var body = socket.request.session.passport.user;
@@ -49,26 +50,38 @@ var router = function(io, sessionMiddleware) {
             Pics.update({
                 _id: data.pics._id
             }, {
-                $inc :{
+                $inc: {
                     likeCount: 1
                 },
                 '$push': {
                     likeUser: {
-                        _id: body._id,
-                        name: body.name,
-                        email: body.email
+                        user: {
+                            _id: body._id,
+                            name: body.name,
+                            email: body.email
+                        },
+                        liked: true
                     }
                 }
-            },function(err, result){
-                if(err){
-                    status = 404;
+            }, function(err, result) {
+                if (err) {
+                    data = {
+                        status: 404,
+                        user: body,
+                        message: 'Sorry something went wrong',
+                        liked: false
+
+                    };
                     throw err;
-                }
-                else{
+                } else {
                     console.log(result);
-                    status = 200;
+                    data = {
+                        status: 200,
+                        user: body,
+                        liked: false
+                    };
                 }
-                socket.emit('likeBack',status);
+                socket.emit('likeBack', data);
             });
         });
     });

@@ -12,7 +12,7 @@ module.exports = mongoose.model('Pic', {
     },
     commentUser: {
         type: Array,
-        
+
         user: {
             type: Array,
             ref: 'User'
@@ -20,15 +20,19 @@ module.exports = mongoose.model('Pic', {
         commentText: [String]
     },
     likeUser: {
+        type: Array,
+        user: {
             type: Array,
             ref: 'User'
+        },
+        liked: [Boolean]
     },
     likeCount: {
         type: Number,
         default: 0
     },
     commentCount: {
-        type: Number	,
+        type: Number,
         default: 0
     }
 });

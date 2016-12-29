@@ -15,7 +15,6 @@
         $http.get('/getNewPics').
         then(function success(response) {
             console.log(response.data.length);
-            console.log(response, (window.performance.now() / 1000).toFixed(3));
             vm.pics = response.data;
             vm.commentText = new Array((response.data).length);
         }, function error(error) {
@@ -29,7 +28,7 @@
 
         function comment(index) {
             console.log(index);
-            vm.pics[index].commentCount = 1;
+            // vm.pics[index].commentCount = 1;
             var data = {
                 pics: vm.pics[index],
                 commentText: vm.commentText[index]
