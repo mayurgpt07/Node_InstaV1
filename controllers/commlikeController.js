@@ -78,7 +78,7 @@ var router = function(io, sessionMiddleware) {
                     data = {
                         status: 200,
                         user: body,
-                        liked: false
+                        liked: true
                     };
                 }
                 socket.emit('likeBack', data);

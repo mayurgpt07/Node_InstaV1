@@ -4,13 +4,29 @@
         passport = require('passport');
 
     var router = function() {
+        // loginRouter.route('/login')
+        //     .post(passport.authenticate('local', {
+        //         failureRedirect: '/'
+        //     }), function(req, res) {
+        //         console.log('This is', req.session.passport.user);
+        //         var user = req.session.passport.user;
+        //         res.send(user).status(200);
+        //     });
+
         loginRouter.route('/login')
-            .post(passport.authenticate('local', {
-                failureRedirect: '/'
-            }), function(req, res) {
-                console.log('This is', req.session.passport.user);
-                var user = req.session.passport.user;
-                res.send(user).status(200);
+            .post(function(req, res, next) {
+                passport.authenticate('local', function(err, user) {
+                    if (err) {
+                        console.log('OLA amigos');
+                        res.send('Login error').status(404);
+                    }
+                    req.login(user, function(err) {
+                        if (err) {
+                            console.log('Error in session');
+                            res.send('Login error in session').status(404);
+                        }
+                    });
+                })(req, res, next);
             });
 
         loginRouter.route('/signup')
@@ -41,7 +57,7 @@
 
         loginRouter.route('/logout')
             .post(function(req, res) {
-                console.log('body from request isss....',req.body);
+                console.log('body from request isss....', req.body);
                 console.log(req.user);
                 var body = req.body;
                 var sessionBody = req.user;
