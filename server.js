@@ -22,7 +22,6 @@ var express = require('express'),
     uploadRouter = require('./controllers/uploadController.js')(),
     viewRouter = require('./controllers/viewController.js')(),
     loginRouter = require('./controllers/loginController.js')(),
-    // profileRouter = require('./controllers/profileController.js')(),
     commlikeRouter = require('./controllers/commlikeController.js')(io, sessionMiddlware);
 
 
@@ -50,7 +49,7 @@ require('./config/passport')(app);
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/usejs', express.static(__dirname + '/usejs'));
 //middleware
-app.use('/share', multipartMiddleware, uploadRouter);
+app.use('/share', uploadRouter);
 //route configurations  
 app.use('/auth', loginRouter);
 // app.use('/profile', profileRouter);

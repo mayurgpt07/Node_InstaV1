@@ -2,12 +2,11 @@
     angular.module('app').
     controller('loginCtrl', loginCtrl);
 
-    loginCtrl.$inject = ['$scope', '$http', '$location', '$rootScope','$sessionStorage'];
+    loginCtrl.$inject = ['$scope', '$http', '$location', '$rootScope','$sessionStorage', '$route'];
 
-    function loginCtrl($scope, $http, $location, $rootScope, $sessionStorage) {
+    function loginCtrl($scope, $http, $location, $rootScope, $sessionStorage, $route) {
         var vm = this;
         console.log('in login-controller');
-        // console.log($sessionStorage);
         vm.$storage = $sessionStorage;
         vm.$storage.loggedIn = false;   
 
@@ -37,10 +36,13 @@
             console.log(vm.credentials);
             $http.post('/auth/login', vm.credentials).then(function success(response) {
                 console.log(response);
-                if (response.data !== null || response.data !== undefined || respsponse.data !== '') {
+                if (response.status === 200) {
                     vm.$storage.data = response.data;
                     vm.$storage.loggedIn = true;
                     $location.url('/profile');
+                }
+                else{
+                    vm.$storage.loggedIn = false;
                 }
             }, function error(error) {
                 console.log(error);

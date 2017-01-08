@@ -10,11 +10,10 @@
         vm.like = undefined;
         vm.comment = comment;
         vm.likePic = likePic;
-        // vm.logout = logout;
 
         $http.get('/getNewPics').
         then(function success(response) {
-            console.log(response.data.length);
+            console.log(response);
             vm.pics = response.data;
             vm.commentText = new Array((response.data).length);
         }, function error(error) {
@@ -27,13 +26,10 @@
         });
 
         function comment(index) {
-            console.log(index);
-            // vm.pics[index].commentCount = 1;
             var data = {
                 pics: vm.pics[index],
                 commentText: vm.commentText[index]
             };
-            console.log(vm.data);
             $http.post('/upload/comment', vm.data).then(function success(response) {
                 console.log(response);
             }, function error(error) {
@@ -42,21 +38,17 @@
         }
 
         function likePic(index){
-            console.log(index);
             var data = {
                 pics: {
                     _id: vm.pics[index]._id,
                     likeCount: vm.pics[index].likeCount
                 }
-
             };
-
             socketFactory.emit('like',data);
             socketFactory.on('likeBack', function(data){
-                console.log(data);
+                vm.like = data.liked;                                                
             });
 
         }
     }
-
 })(window, window.angular);

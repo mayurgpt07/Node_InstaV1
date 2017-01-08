@@ -16,26 +16,15 @@
         loginRouter.route('/login')
             .post(function(req, res, next) {
                 passport.authenticate('local', function(err, user, info) {
-                    // if (err) {
-                    //     console.log('OLA amigos');
-                    //     res.send('Login error').status(404);
-                    // }
-                    // req.login(user, function(err) {
-                    //     if (err) {
-                    //         console.log('Error in session');
-                    //         res.send('Login error in session').status(404);
-                    //     }
-                    // });
-                    if(user === false){
+                    if (user === false) {
                         console.log('entered in false user');
                         res.status(404).send('Login error bitch');
-                    }else{
-                        req.login(user,function(err){
-                            if(err){
+                    } else {
+                        req.login(user, function(err) {
+                            if (err) {
                                 console.log('entered in err of session');
                                 res.status(404).send('Login error in session');
-                            }
-                            else{
+                            } else {
                                 console.log('All is well');
                                 res.status(200).send(user);
                             }

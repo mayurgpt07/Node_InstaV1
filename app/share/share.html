@@ -1,9 +1,11 @@
 <div>
-	Select :<input type="file" ngf-select ng-model="Share.file" name="Share.file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" />
+	Select :<input type="file" ngf-select ng-model="Share.file" name="Share.file" ngf-pattern="'application/pdf'" ngf-accept="'application/pdf'" ngf-max-size="20MB" />
 	<h4>Title : </h4>
 	<input type="text" ng-model="Share.name" name="name"> <br />
 	<h4>Description : </h4>
 	<textarea ng-model="Share.description">Description</textarea>
 	<br />
 	<button class="btn btn-primary" ng-click="Share.upload()">Send to server</button>
+
 </div>
+
