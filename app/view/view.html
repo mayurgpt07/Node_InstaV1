@@ -1,7 +1,9 @@
 <div>
 	<!-- Grab new images and display them -->
 	<div ng-repeat = "pics in View.pics track by $index">
-		<img src="{{pics.url}}" style="height: 150; width: 150;" />
+		<!-- <img src="{{pics.url}}" style="height: 150; width: 150;" /> -->
+		<embed src={{View.fileURL}}></embed>
+
 		<div>
 			<form>
 				<input type="text" name="commentText" ng-model="View.commentText[$index]" />

@@ -2,21 +2,23 @@
     angular.module('app').
     controller('loginCtrl', loginCtrl);
 
-    loginCtrl.$inject = ['$scope', '$http', '$location', '$rootScope','$sessionStorage', '$route'];
+    loginCtrl.$inject = ['$scope', '$http', '$location', '$rootScope', '$sessionStorage', '$route'];
 
     function loginCtrl($scope, $http, $location, $rootScope, $sessionStorage, $route) {
         var vm = this;
         console.log('in login-controller');
+        // vm.checkedNo = true;
+        vm.admin = false;
         vm.$storage = $sessionStorage;
-        vm.$storage.loggedIn = false;   
-
+        vm.$storage.loggedIn = false;
         vm.credentials = {
             email: undefined,
             password: undefined
         };
         vm.signupCredentials = {
             email: undefined,
-            password: undefined
+            password: undefined,
+            admin: vm.admin
         };
         vm.login = login;
         vm.signup = signup;
@@ -27,9 +29,9 @@
         });
 
         $scope.$watch(function() {
-            return vm.signupCredentials.email;
+            return vm.admin;
         }, function() {
-            console.log(vm.signupCredentials.email);
+            console.log('admin is', vm.admin);
         });
 
         function login() {
@@ -40,8 +42,7 @@
                     vm.$storage.data = response.data;
                     vm.$storage.loggedIn = true;
                     $location.url('/profile');
-                }
-                else{
+                } else {
                     vm.$storage.loggedIn = false;
                 }
             }, function error(error) {
@@ -50,11 +51,10 @@
         }
 
         function signup() {
+            console.log(vm.admin);
+
             $http.post('/auth/signup', vm.signupCredentials).then(function success(response) {
                 console.log(response);
-                vm.credentials.email = response.data.email;
-                vm.credentials.password = response.data.password;
-                vm.login();
                 // $location.path('/profile/' + response.data._id);
             }, function error(error) {
                 console.log(error);

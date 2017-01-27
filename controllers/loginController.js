@@ -40,6 +40,7 @@
                 user.name = 'mayur';
                 user.email = req.body.email;
                 user.password = req.body.password;
+                user.isAdmin = req.body.admin;
                 user.save(function(err, result) {
                     if (err) {
                         throw err;

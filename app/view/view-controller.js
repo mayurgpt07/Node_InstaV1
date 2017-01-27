@@ -15,6 +15,10 @@
         then(function success(response) {
             console.log(response);
             vm.pics = response.data;
+            console.log(vm.pics[0].docs.data.data);
+            var file = new Blob([], {type: 'application/pdf'}); 
+            vm.fileURL = URL.createObjectURL(file);
+            console.log(vm.fileURL);  
             vm.commentText = new Array((response.data).length);
         }, function error(error) {
             console.log(error);
@@ -51,4 +55,9 @@
 
         }
     }
+
+    // var file = new Blob([vm.pics.docs.data.data], {type: vm.pics.docs.contentType});
+    //         var fileURL = URL.createObjectURL(file);
+
+    //         console.log(fileURL);
 })(window, window.angular);

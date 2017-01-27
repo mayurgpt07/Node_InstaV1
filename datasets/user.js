@@ -9,6 +9,6 @@ module.exports = mongoose.model('User', {
         type: Date,
         default: Date.now
     },
-    isAdmin: Boolean,
-    isVerified: Boolean
+    isAdmin: {type: Boolean, default: false},
+    isVerified: {type: Boolean, default: false}
 });
